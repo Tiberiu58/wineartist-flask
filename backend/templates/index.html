@@ -1,0 +1,60 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+<header class="hero">
+  <canvas id="scene"></canvas>
+  <div class="hero-copy container">
+    <h1>Wine reimagined as light and space</h1>
+    <p>Enter the virtual cellar. Scroll down to explore provenance, craft, and limited editions.</p>
+  </div>
+</header>
+
+<section id="scroll-sections">
+  <div class="panel">
+    <div class="container">
+      <h2>Craft & Provenance</h2>
+      <p>Single‑estate partners, small batches, meticulous storage.</p>
+    </div>
+  </div>
+  <div class="panel alt">
+    <div class="container">
+      <h2>Art on Glass</h2>
+      <p>Rotating collaborations with contemporary artists—numbered and signed.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="container">
+      <h2>Cellar to Door</h2>
+      <p>Temperature‑controlled logistics and sustainable packaging.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shop" class="shop container">
+  <h2>Shop</h2>
+  <p class="lead">Curated French wines with hand‑painted bottles. Limited series, careful storage, and direct sourcing.</p>
+  <div class="grid">
+    {% for p in products %}
+    <div class="card">
+      <div class="bottle-sim"><span>(Bottle)</span></div>
+      <div class="row space-between">
+        <div>
+          <div class="name">{{ p.name }}</div>
+          <div class="meta">{{ p.region }} · {{ p.year }}</div>
+        </div>
+       <div class="price">{{ p.price | euro }}</div>
+
+
+      </div>
+      <button class="btn-primary add-to-cart" data-id="{{ p.id }}" data-name="{{ p.name }}" data-price="{{ p.price }}">Add to cart</button>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<footer class="container footer">
+  © 2025 WineArtist. All rights reserved.
+</footer>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WineArtist • Immersive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <a href="/backend/static" class="brand">WineArtist</a>
+        <div class="nav-links">
+          <a href="#shop">Shop</a>
+          <button id="cartButton">Cart <span id="cartCount" class="badge">0</span></button>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <aside id="cartDrawer" class="cart-drawer">
+      <div class="cart-head">
+        <h3>Your Cart</h3>
+        <button id="cartClose">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-foot">
+        <div class="row"><span>Subtotal</span><strong id="cartSubtotal">€0.00</strong></div>
+        <button id="checkoutBtn" class="btn-primary">Checkout</button>
+      </div>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
