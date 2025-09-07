@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react'
+import Test from '@/components/Test'
 
 export default function Home() {
     useEffect(() => {
