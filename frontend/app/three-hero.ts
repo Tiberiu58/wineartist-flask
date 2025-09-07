@@ -76,7 +76,11 @@ const bottle = new THREE.Group()
 // corpul principal
 const body = new THREE.Mesh(
     new THREE.CylinderGeometry(0.9, 1.1, 5, 32),
+ codex/model-a-rotating-wine-bottle-using-three.js-and-gsap-bhq30i
     new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+
+    new THREE.MeshStandardMaterial({ color: 0x1a2e1a, roughness: 0.2, metalness: 0.1 }),
+ main
 )
 body.position.y = 2.5
 bottle.add(body)
@@ -84,7 +88,11 @@ bottle.add(body)
 // gâtul
 const neck = new THREE.Mesh(
     new THREE.CylinderGeometry(0.3, 0.4, 2, 32),
+ codex/model-a-rotating-wine-bottle-using-three.js-and-gsap-bhq30i
     new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+
+    new THREE.MeshStandardMaterial({ color: 0x1a2e1a, roughness: 0.2, metalness: 0.1 }),
+main
 )
 neck.position.y = 5.5
 bottle.add(neck)
