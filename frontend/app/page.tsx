@@ -1,6 +1,5 @@
 'use client'
 import { useEffect } from 'react'
-import Test from '@/components/Test'
 
 export default function Home() {
     useEffect(() => {
@@ -15,13 +14,13 @@ export default function Home() {
             lenis.on('scroll', ST.update)
             gsap.ticker.add((t) => lenis.raf(t * 1000))
 
-            await import('./three-hero')   // setează canvas + animații 3D
+            void import('./three-hero')   // setează canvas + animații 3D fără a bloca fetch-ul
 
             const base = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5001'
             const res = await fetch(`${base}/api/products`)
-            const products = await res.json()
+            const products: Array<{ id: string; name: string; region: string; year: number; price: number }> = await res.json()
             const grid = document.getElementById('grid')!
-            grid.innerHTML = products.map((p:any)=>`
+            grid.innerHTML = products.map((p) =>`
         <div class="card">
           <div class="name">${p.name}</div>
           <div class="meta">${p.region} · ${p.year}</div>
@@ -29,10 +28,10 @@ export default function Home() {
           <button class="buy" data-id="${p.id}">Buy</button>
         </div>`).join('')
 
-            grid.addEventListener('click', async (e:any) => {
-                const t = e.target
+            grid.addEventListener('click', async (e: MouseEvent) => {
+                const t = e.target as HTMLElement
                 if (!t.classList.contains('buy')) return
-                const id = t.getAttribute('data-id')
+                const id = t.getAttribute('data-id')!
                 const r = await fetch(`${base}/api/checkout`, {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ items: [{ id, qty: 1 }] })
