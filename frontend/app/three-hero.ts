@@ -1,5 +1,6 @@
 // frontend/app/three-hero.ts
 // CREAȚI/EDITAȚI: creează dacă nu există — ÎNLOCUIEȘTE TOT
+'use client'
 
 import * as THREE from 'three'
 import { gsap } from 'gsap'
@@ -11,7 +12,6 @@ gsap.registerPlugin(ScrollTrigger)
 const canvas = document.getElementById('scene') as HTMLCanvasElement | null
 if (!canvas) {
     // Nu aruncăm eroare – pagina poate fi randată fără canvas în anumite rute
-    // eslint-disable-next-line no-console
     console.warn('[three-hero] #scene not found, skipping WebGL init')
     export {}
 }
@@ -33,10 +33,13 @@ const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerH
 camera.position.set(6, 4, 10)
 
 // 4) Lumină
-scene.add(new THREE.AmbientLight(0xffffff, 0.28))
-const dir = new THREE.DirectionalLight(0xffffff, 1.2)
+scene.add(new THREE.AmbientLight(0xffffff, 0.4))
+const dir = new THREE.DirectionalLight(0xffffff, 1.8)
 dir.position.set(4, 8, 2)
 scene.add(dir)
+const fill = new THREE.PointLight(0xffffff, 0.6)
+fill.position.set(-4, 4, 4)
+scene.add(fill)
 
 // 5) „Room” — cutie cu fețele interioare vizibile (BackSide), ca să nu mai ieșim „afară”
 const room = new THREE.Mesh(
@@ -66,6 +69,38 @@ for (let i = 0; i < 8; i++) {
     strip.position.set(Math.sin(i) * 6, 1.5 + i * 0.35, Math.cos(i) * 6)
     scene.add(strip)
 }
+
+// 7.5) Sticlă de vin simplă (corp + gât + dop)
+const bottle = new THREE.Group()
+
+// corpul principal
+const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.9, 1.1, 5, 32),
+    new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+)
+body.position.y = 2.5
+bottle.add(body)
+
+// gâtul
+const neck = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.4, 2, 32),
+    new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+)
+neck.position.y = 5.5
+bottle.add(neck)
+
+// dopul
+const cork = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.35, 0.35, 0.6, 32),
+    new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.8 }),
+)
+cork.position.y = 6.6
+bottle.add(cork)
+
+scene.add(bottle)
+
+// animație de rotație continuă
+gsap.to(bottle.rotation, { y: Math.PI * 2, duration: 20, ease: 'none', repeat: -1 })
 
 // 8) Redimensionare robustă (pe fereastră, nu pe clientWidth care poate fi 0)
 function setRendererSize() {
