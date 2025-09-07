@@ -1,5 +1,6 @@
 // frontend/app/three-hero.ts
 // CREAȚI/EDITAȚI: creează dacă nu există — ÎNLOCUIEȘTE TOT
+'use client'
 
 import * as THREE from 'three'
 import { gsap } from 'gsap'
@@ -32,10 +33,13 @@ const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerH
 camera.position.set(6, 4, 10)
 
 // 4) Lumină
-scene.add(new THREE.AmbientLight(0xffffff, 0.28))
-const dir = new THREE.DirectionalLight(0xffffff, 1.2)
+scene.add(new THREE.AmbientLight(0xffffff, 0.4))
+const dir = new THREE.DirectionalLight(0xffffff, 1.8)
 dir.position.set(4, 8, 2)
 scene.add(dir)
+const fill = new THREE.PointLight(0xffffff, 0.6)
+fill.position.set(-4, 4, 4)
+scene.add(fill)
 
 // 5) „Room” — cutie cu fețele interioare vizibile (BackSide), ca să nu mai ieșim „afară”
 const room = new THREE.Mesh(
@@ -72,7 +76,11 @@ const bottle = new THREE.Group()
 // corpul principal
 const body = new THREE.Mesh(
     new THREE.CylinderGeometry(0.9, 1.1, 5, 32),
+ codex/model-a-rotating-wine-bottle-using-three.js-and-gsap-bhq30i
+    new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+
     new THREE.MeshStandardMaterial({ color: 0x1a2e1a, roughness: 0.2, metalness: 0.1 }),
+ main
 )
 body.position.y = 2.5
 bottle.add(body)
@@ -80,7 +88,11 @@ bottle.add(body)
 // gâtul
 const neck = new THREE.Mesh(
     new THREE.CylinderGeometry(0.3, 0.4, 2, 32),
+ codex/model-a-rotating-wine-bottle-using-three.js-and-gsap-bhq30i
+    new THREE.MeshStandardMaterial({ color: 0x2d5b2d, roughness: 0.15, metalness: 0.25 }),
+
     new THREE.MeshStandardMaterial({ color: 0x1a2e1a, roughness: 0.2, metalness: 0.1 }),
+main
 )
 neck.position.y = 5.5
 bottle.add(neck)
