@@ -48,8 +48,7 @@ export default function Home() {
             <header className="hero">
                 <canvas id="scene" />
                 <div className="hero-copy">
-                    <h1>Wine reimagined as light & space</h1>
-                    <p>Scroll to explore.</p>
+                    <h1>Wine</h1>
                 </div>
             </header>
             <div id="scroll-sections">
